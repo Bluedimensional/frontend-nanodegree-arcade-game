@@ -9,7 +9,7 @@
  * drawn but that is not the case. What's really happening is the entire "scene"
  * is being drawn over and over, presenting the illusion of animation.
  *
- * This engine makes the canvas' context (ctx) object globally available to make 
+ * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
 
@@ -22,10 +22,23 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        id;
 
-    canvas.width = 505;
-    canvas.height = 606;
+    const modal = document.querySelector('.modal-background'); //store modal div in modal
+    const replay = document.querySelector('.modal-button'); // store replay button as replay
+
+    // replay button hides modal window, calls reset on player, sets victory to false, and
+  replay.addEventListener('click', function() {
+        modal.classList.toggle('hide');
+        player.reset();
+        player.victory = false;
+        win.requestAnimationFrame(main);
+    });
+
+
+    canvas.width = 505; // 505 / 5 = 101
+    canvas.height = 606; // 606 / 6 = 101
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -55,7 +68,15 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+         if (player.victory === true) {
+            setTimeout(function(){
+                win.cancelAnimationFrame(id);
+                modal.classList.toggle('hide');
+            }, 200);
+
+        } else {
+        id = win.requestAnimationFrame(main);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -117,9 +138,9 @@ var Engine = (function(global) {
             numRows = 6,
             numCols = 5,
             row, col;
-        
+
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height) // A method to the CanvasRenderingContext2D object established earlier, takes 4 params, the x&y for a starting position, and the canvas width and height
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -173,7 +194,7 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy-ben.png'
     ]);
     Resources.onReady(init);
 
