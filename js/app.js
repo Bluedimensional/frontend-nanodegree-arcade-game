@@ -13,7 +13,7 @@ var Enemy = function(x, y, speed) {
 // Hero class
 class Hero {
     constructor() {
-        this.sprite = 'images/char-boy-ben.png';
+        this.sprite = 'images/char-boy.png';
         this.step = 101;
         this.jump = 83;
         this.startX = this.step * 2;
@@ -60,7 +60,7 @@ class Hero {
                                 }
                                 break;
                             case 'right':
-                                if (this.x < this.step * 4) {
+                                if (this.x < this.step * 4) {   // if player is to the left of the fifth column, move to the right
                                     this.x += this.step;
                                 }
                                 break;
@@ -84,10 +84,10 @@ class Hero {
 
 const player = new Hero();
 // create enemy pbject and store in variable
-const bug1 = new Enemy(-101, 0, 200);
+const bug1 = new Enemy(-101, 0, 100);
 // create array for all enemies and push bug1 into it
-const bug2 = new Enemy(-101, 83, 300);
-const bug3 = new Enemy((-101 * 2.5), 166, 300);
+const bug2 = new Enemy(-101, 250, 100);
+const bug3 = new Enemy((-101 * 2.5), 166, 100);
 const allEnemies = [];
 allEnemies.push(bug1, bug2, bug3);
 
