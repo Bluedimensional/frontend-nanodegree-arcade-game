@@ -35,7 +35,7 @@ class Hero {
         }
         // Check for victory
             // Did player x and y reach final tile row?
-            if (this.y === 55) {
+            if (this.y < 55) {
                 this.victory = true;
             }
     }
@@ -84,10 +84,10 @@ class Hero {
 
 const player = new Hero();
 // create enemy pbject and store in variable
-const bug1 = new Enemy(-101, 0, 100);
+const bug1 = new Enemy(-101, 0, 250);
 // create array for all enemies and push bug1 into it
-const bug2 = new Enemy(-101, 250, 100);
-const bug3 = new Enemy((-101 * 2.5), 166, 100);
+const bug2 = new Enemy(-101, 83, 200);
+const bug3 = new Enemy((-101 * 2.5), 166, 400);
 const allEnemies = [];
 allEnemies.push(bug1, bug2, bug3);
 
