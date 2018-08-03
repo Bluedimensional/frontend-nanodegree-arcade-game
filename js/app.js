@@ -14,14 +14,28 @@ playersBox = ['images/char-boy.png', 'images/char-cat-girl.png', 'images/char-ho
 let playerContainer = document.getElementById('players-container');
 playerContainer.innerHTML = "";
 for (var i = 0; i < playersBox.length; i++) {
+    // Update the playerContainer div with each player image
     playerContainer.innerHTML += '<img src=\"'+playersBox[i]+'\">';
+    // add class to each image - get images
+    const playerChoice = document.querySelectorAll('#players-container img');
+    // set class of each image to .playerChoice
+    playerChoice[i].className = 'players-to-choose';
+}
+
+// listen to each player image, on click update sprite's image
+let playerInBox = document.querySelectorAll('.players-to-choose');
+for (var p = 0; p < playerInBox.length; p++) {
+    playerInBox[p].addEventListener('click', function() {
+        console.log('click new');
+    })
 }
 
 // document.getElementById('players-container').innerHTML = '<img src=\"images/char-pink-girl.png\">';
 // Hero class
 class Hero {
     constructor() {
-        this.sprite = 'images/char-boy.png';
+        // this.sprite will change from event listener
+        this.sprite = playersBox[2];
         this.step = 101;
         this.jump = 83;
         this.startX = this.step * 2;
@@ -37,7 +51,9 @@ class Hero {
         // Check collision here
         for (let enemy of allEnemies) {
             // did player x and y collide with enemy?
-            if (this.y === enemy.y && (enemy.x + enemy.step / 2 > this.x && enemy.x < this.x + this.step / 2)) {
+            if (this.y === enemy.y &&
+                (enemy.x + enemy.step / 2 > this.x &&
+                enemy.x < this.x + this.step / 2)) {
                 this.reset();
             }
         }
@@ -82,7 +98,6 @@ class Hero {
                 }
                 break;
         }
-
     }
 
     // Reset hero
@@ -118,7 +133,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x < this.boundary) {
         // move forward
         // increment x by speed * dt
-        this.x += (this.speed * dt) / 1; // changing "/1" - overall enemy speed
+        this.x += (this.speed * dt) / 2; // changing "/1" - overall enemy speed
     } else {
         this.x = -83; // reset pos to start
     }
