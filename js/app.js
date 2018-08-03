@@ -10,9 +10,11 @@ var Enemy = function(x, y, speed) {
 
 playersBox = ['images/char-boy.png', 'images/char-cat-girl.png', 'images/char-horn-girl.png', 'images/char-pink-girl.png', 'images/char-princess-girl.png'];
 
+// Container holding player images and loop to update them in HTML
 let playerContainer = document.getElementById('players-container');
+playerContainer.innerHTML = "";
 for (var i = 0; i < playersBox.length; i++) {
-    playerContainer.innerHTML = '<img src=\"'+playersBox[i]+'\">';
+    playerContainer.innerHTML += '<img src=\"'+playersBox[i]+'\">';
 }
 
 // document.getElementById('players-container').innerHTML = '<img src=\"images/char-pink-girl.png\">';
