@@ -29,7 +29,7 @@ var Engine = (function(global) {
     const replay = document.querySelector('.modal-button'); // store replay button as replay
 
     // replay button hides modal window, calls reset on player, sets victory to false, and
-  replay.addEventListener('click', function() {
+    replay.addEventListener('click', function() {
         modal.classList.toggle('hide');
         player.reset();
         player.victory = false;
@@ -68,14 +68,15 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-         if (player.victory === true) {
-            setTimeout(function(){
+        if (player.victory === true) {
+            setTimeout(function() {
                 win.cancelAnimationFrame(id);
                 modal.classList.toggle('hide');
+                // other code to execute upon victory
             }, 200);
 
         } else {
-        id = win.requestAnimationFrame(main);
+            id = win.requestAnimationFrame(main);
         }
     }
 
@@ -128,19 +129,19 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 5,
             row, col;
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height) // A method to the CanvasRenderingContext2D object established earlier, takes 4 params, the x&y for a starting position, and the canvas width and height
+        ctx.clearRect(0, 0, canvas.width, canvas.height) // A method to the CanvasRenderingContext2D object established earlier, takes 4 params, the x&y for a starting position, and the canvas width and height
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that

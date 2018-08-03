@@ -23,65 +23,71 @@ class Hero {
         this.victory = false;
     }
 
-        // Methods
+    // Methods
     update() {
 
         // Check collision here
         for (let enemy of allEnemies) {
             // did player x and y collide with enemy?
-            if (this.y === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2)) {
+            if (this.y === enemy.y && (enemy.x + enemy.step / 2 > this.x && enemy.x < this.x + this.step / 2)) {
                 this.reset();
             }
         }
         // Check for victory
-            // Did player x and y reach final tile row?
-            if (this.y < 55) {
-                this.victory = true;
-            }
+        // Did player y reach final tile row?
+        if (this.y < 55) { // if hero is within 55 pixels of top
+            setTimeout(function() {
+                // alert("Hello");
+            }, 1000);
+            var winBox = document.querySelector('#winBox');
+            winBox.classList.toggle('celebrate');
+            this.victory = true;
+
+        }
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-                // Handle keyboard input
-                    // Update player's x and y property according to input
-                   // @param {string} input - direction to travel
+    // Handle keyboard input
+    // Update player's x and y property according to input
+    // @param {string} input - direction to travel
 
-                    handleInput(input) {
-                        switch(input) {
-                            case 'left':
-                                if (this.x > 0) {
-                                this.x -= this.step;
-                                }
-                                break;
-                            case 'up':
-                                if (this.y > 0) {
-                                    this.y -= this.jump;
-                                }
-                                break;
-                            case 'right':
-                                if (this.x < this.step * 4) {   // if player is to the left of the fifth column, move to the right
-                                    this.x += this.step;
-                                }
-                                break;
-                            case 'down':
-                            if (this.y < this.jump * 4) {
-                                this.y += this.jump;
-                                }
-                                break;
-                        }
-
-                    }
-
-
-                // Reset hero
-                reset() {
-                    // Set x and y to starting point
-                    this.x = this.startX;
-                    this.y = this.startY;
+    handleInput(input) {
+        switch (input) {
+            case 'left':
+                if (this.x > 0) {
+                    this.x -= this.step;
                 }
-}
+                break;
+            case 'up':
+                if (this.y > 0) {
+                    this.y -= this.jump;
+                }
+                break;
+            case 'right':
+                if (this.x < this.step * 4) { // if player is to the left of the fifth column, move to the right
+                    this.x += this.step;
+                }
+                break;
+            case 'down':
+                if (this.y < this.jump * 4) {
+                    this.y += this.jump;
+                }
+                break;
+        }
 
+    }
+
+
+    // Reset hero
+    reset() {
+        // Set x and y to starting point
+        this.x = this.startX;
+        this.y = this.startY;
+    }
+}
+// create a player from the Hero object
 const player = new Hero();
 // create enemy pbject and store in variable
 const bug1 = new Enemy(-101, 0, 250);
@@ -101,12 +107,12 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     // If enemy is not passed boundary
-    if(this.x < this.boundary) {
+    if (this.x < this.boundary) {
         // move forward
         // increment x by speed * dt
-        this.x += this.speed * dt;
+        this.x += (this.speed * dt) / 1; // changing "/1" - overall enemy speed
     } else {
-        this.x = -83;        // reset pos to start
+        this.x = -83; // reset pos to start
     }
 };
 
