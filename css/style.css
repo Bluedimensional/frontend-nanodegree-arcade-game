@@ -41,7 +41,8 @@ body {
 
 /* Each image in players-container is given this class */
 .players-to-choose {
-
+	width: 80px;
+	margin: 10px;
 }
 
 /* Hover effect for each player */

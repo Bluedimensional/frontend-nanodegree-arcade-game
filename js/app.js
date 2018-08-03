@@ -26,7 +26,10 @@ for (var i = 0; i < playersBox.length; i++) {
 let playerInBox = document.querySelectorAll('.players-to-choose');
 for (var p = 0; p < playerInBox.length; p++) {
     playerInBox[p].addEventListener('click', function() {
-        // code to make clicked image current player image
+        // console.log(this);// code to make clicked image current player image
+        let chosenPlayer = this;
+        const el = this.getAttribute('src'); // get src attribute of clicked image
+        console.log(el);
     })
 }
 
@@ -46,7 +49,9 @@ for (var q = 0; q < playerInBox.length; q++) {
 class Hero {
     constructor() {
         // this.sprite will change from event listener
-        this.sprite = playersBox[2];
+        // listen for click on each player image, then => assign to this.sprite
+
+        this.sprite = playersBox[2]; // neeeds to come from clicked player image in box
         this.step = 101;
         this.jump = 83;
         this.startX = this.step * 2;
