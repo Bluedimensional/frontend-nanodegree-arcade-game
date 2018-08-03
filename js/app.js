@@ -22,15 +22,26 @@ for (var i = 0; i < playersBox.length; i++) {
     playerChoice[i].className = 'players-to-choose';
 }
 
-// listen to each player image, on click update sprite's image
+// TODO: listen to each player image, on click update current sprite's image
 let playerInBox = document.querySelectorAll('.players-to-choose');
 for (var p = 0; p < playerInBox.length; p++) {
     playerInBox[p].addEventListener('click', function() {
-        console.log('click new');
+        // code to make clicked image current player image
     })
 }
 
-// document.getElementById('players-container').innerHTML = '<img src=\"images/char-pink-girl.png\">';
+//toggle animation class on hover for each player
+function classToggle() {
+this.classList.toggle('transform-player');
+}
+for (var q = 0; q < playerInBox.length; q++) {
+    playerInBox[q].addEventListener('mouseover', classToggle)
+    playerInBox[q].addEventListener('mouseout', classToggle)
+}
+
+
+
+
 // Hero class
 class Hero {
     constructor() {
