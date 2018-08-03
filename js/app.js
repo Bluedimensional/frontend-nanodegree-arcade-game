@@ -8,8 +8,14 @@ var Enemy = function(x, y, speed) {
     this.boundary = this.step * 5;
 };
 
+playersBox = ['images/char-boy.png', 'images/char-cat-girl.png', 'images/char-horn-girl.png', 'images/char-pink-girl.png', 'images/char-princess-girl.png'];
 
+let playerContainer = document.getElementById('players-container');
+for (var i = 0; i < playersBox.length; i++) {
+    playerContainer.innerHTML = '<img src=\"'+playersBox[i]+'\">';
+}
 
+// document.getElementById('players-container').innerHTML = '<img src=\"images/char-pink-girl.png\">';
 // Hero class
 class Hero {
     constructor() {
@@ -39,8 +45,6 @@ class Hero {
             setTimeout(function() {
                 // alert("Hello");
             }, 1000);
-            var winBox = document.querySelector('#winBox');
-            winBox.classList.toggle('celebrate');
             this.victory = true;
 
         }
@@ -79,7 +83,6 @@ class Hero {
 
     }
 
-
     // Reset hero
     reset() {
         // Set x and y to starting point
@@ -87,17 +90,20 @@ class Hero {
         this.y = this.startY;
     }
 }
-// create a player from the Hero object
+
+
+// Place the player object in a variable called player
 const player = new Hero();
 // create enemy pbject and store in variable
 const bug1 = new Enemy(-101, 0, 250);
 // create array for all enemies and push bug1 into it
 const bug2 = new Enemy(-101, 83, 200);
 const bug3 = new Enemy((-101 * 2.5), 166, 400);
+// init allEnemies array
 const allEnemies = [];
+// for each enemy create and push a new Enemy into above array
+// Place all enemy objects in an array called allEnemies
 allEnemies.push(bug1, bug2, bug3);
-
-
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -116,26 +122,13 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-
-// New hero object
-
-// init allEnemies array
-// for each enemy create and push a new Enemy into above array
-
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// a handleInput() method.
-
 
 // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -149,8 +142,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-
 
 /* TODO: setting to change enemy speeds for difficulties
 allow selection of differentplayer sprites

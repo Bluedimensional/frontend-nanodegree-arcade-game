@@ -24,13 +24,9 @@ body {
 	display: none;
 }
 
-
-#winBox {
-	width: 200px;
-	height: 200px;
-	background-color: #333;
-}
-
-.celebrate {
-	border-radius: 25px;
+#players-container {
+	height: 151px;
+	width: 505px;
+	background-color: #eee;
+	margin: 0 auto;
 }

@@ -25,7 +25,13 @@ var Engine = (function(global) {
         lastTime,
         id;
 
-    const modal = document.querySelector('.modal-background'); //store modal div in modal
+
+
+    canvas.width = 505; // 505 / 5 = 101
+    canvas.height = 606; // 606 / 6 = 101
+    doc.body.appendChild(canvas);
+
+      const modal = document.querySelector('.modal-background'); //store modal div in modal
     const replay = document.querySelector('.modal-button'); // store replay button as replay
 
     // replay button hides modal window, calls reset on player, sets victory to false, and
@@ -36,10 +42,6 @@ var Engine = (function(global) {
         win.requestAnimationFrame(main);
     });
 
-
-    canvas.width = 505; // 505 / 5 = 101
-    canvas.height = 606; // 606 / 6 = 101
-    doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -195,7 +197,10 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
     ]);
     Resources.onReady(init);
 
