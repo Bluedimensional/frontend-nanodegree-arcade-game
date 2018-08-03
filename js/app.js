@@ -43,15 +43,10 @@ for (var q = 0; q < playerInBox.length; q++) {
 }
 
 
-
-
 // Hero class
 class Hero {
     constructor() {
-        // this.sprite will change from event listener
-        // listen for click on each player image, then => assign to this.sprite
-
-        this.sprite = playersBox[2]; // neeeds to come from clicked player image in box
+        this.sprite = playersBox[2]; // neeeds to come from "el"
         this.step = 101;
         this.jump = 83;
         this.startX = this.step * 2;
