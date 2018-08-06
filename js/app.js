@@ -30,6 +30,7 @@ for (var p = 0; p < playerInBox.length; p++) {
         let chosenPlayer = this;
         const el = this.getAttribute('src'); // get src attribute of clicked image
         console.log(el);
+        player.Sprite = el;
     })
 }
 
@@ -54,6 +55,15 @@ class Hero {
         this.x = this.startX;
         this.y = this.startY;
         this.victory = false;
+    }
+
+    set Sprite(sprite) {
+        this.sprite = sprite;
+        console.log(`sprite is ${sprite}`);
+    }
+
+    get Sprite() {
+        return this.sprite;
     }
 
     // Methods
@@ -122,6 +132,7 @@ class Hero {
 
 // Place the player object in a variable called player
 const player = new Hero();
+
 // create enemy pbject and store in variable
 const bug1 = new Enemy(-101, 0, 250);
 // create array for all enemies and push bug1 into it
