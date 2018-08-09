@@ -9,6 +9,7 @@ Instructions
 * [Instructions](#instructions)
 * [Download](#download)
 * [License](#license)
+* [Resources](#resources)
 
 ## Instructions
 
@@ -21,3 +22,7 @@ You can fork or clone freely.
 ## License
 
 This code is free to use and edit.
+
+## Resources
+
+Matthew Cranford's [blog](https://matthewcranford.com/arcade-game-walkthrough-part-1-starter-code-breakdown/) was helpful in the creation of this project.
