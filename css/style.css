@@ -24,7 +24,13 @@ body {
 	display: none;
 }
 
+/*
+ * Canvas
+ */
 
+ canvas {
+ 	margin-top: -50px;
+ }
 
 /*
  * Container holding players to choose from
