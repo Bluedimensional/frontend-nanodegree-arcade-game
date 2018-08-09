@@ -8,12 +8,47 @@ var Enemy = function(x, y, speed) {
     this.boundary = this.step * 5;
 };
 
+// Put all the player's images into an array
+playersBox = ['images/char-boy.png', 'images/char-cat-girl.png', 'images/char-horn-girl.png', 'images/char-pink-girl.png', 'images/char-princess-girl.png'];
+
+// Container holding player images and loop to update them in HTML
+let playerContainer = document.getElementById('players-container');
+playerContainer.innerHTML = "";
+for (var i = 0; i < playersBox.length; i++) {
+    // Update the playerContainer div with each player image
+    playerContainer.innerHTML += '<img src=\"'+playersBox[i]+'\">';
+    // add class to each image - get images
+    const playerChoice = document.querySelectorAll('#players-container img');
+    // set class of each image to .playerChoice
+    playerChoice[i].className = 'players-to-choose';
+}
+
+// Listen to each player image, on click update current player's image
+let playerInBox = document.querySelectorAll('.players-to-choose');
+for (var p = 0; p < playerInBox.length; p++) {
+    playerInBox[p].addEventListener('click', function() {
+        // console.log(this);// code to make clicked image current player image
+        let chosenPlayer = this;
+        const el = this.getAttribute('src'); // get src attribute of clicked image
+        console.log(el);
+        player.Sprite = el;   // Set player image to image's src attribute.
+    })
+}
+
+//toggle animation class on hover for each player
+function classToggle() {
+this.classList.toggle('transform-player');
+}
+for (var q = 0; q < playerInBox.length; q++) {
+    playerInBox[q].addEventListener('mouseover', classToggle)
+    playerInBox[q].addEventListener('mouseout', classToggle)
+}
 
 
 // Hero class
 class Hero {
     constructor() {
-        this.sprite = 'images/char-boy.png';
+        this.sprite = playersBox[2];
         this.step = 101;
         this.jump = 83;
         this.startX = this.step * 2;
@@ -23,13 +58,24 @@ class Hero {
         this.victory = false;
     }
 
+    set Sprite(sprite) {
+        this.sprite = sprite;
+        console.log(`sprite is ${sprite}`);
+    }
+
+    get Sprite() {
+        return this.sprite;
+    }
+
     // Methods
     update() {
 
         // Check collision here
         for (let enemy of allEnemies) {
             // did player x and y collide with enemy?
-            if (this.y === enemy.y && (enemy.x + enemy.step / 2 > this.x && enemy.x < this.x + this.step / 2)) {
+            if (this.y === enemy.y &&
+                (enemy.x + enemy.step / 2 > this.x &&
+                enemy.x < this.x + this.step / 2)) {
                 this.reset();
             }
         }
@@ -39,8 +85,6 @@ class Hero {
             setTimeout(function() {
                 // alert("Hello");
             }, 1000);
-            var winBox = document.querySelector('#winBox');
-            winBox.classList.toggle('celebrate');
             this.victory = true;
 
         }
@@ -76,9 +120,7 @@ class Hero {
                 }
                 break;
         }
-
     }
-
 
     // Reset hero
     reset() {
@@ -87,17 +129,21 @@ class Hero {
         this.y = this.startY;
     }
 }
-// create a player from the Hero object
+
+
+// Place the player object in a variable called player
 const player = new Hero();
+
 // create enemy pbject and store in variable
 const bug1 = new Enemy(-101, 0, 250);
 // create array for all enemies and push bug1 into it
 const bug2 = new Enemy(-101, 83, 200);
 const bug3 = new Enemy((-101 * 2.5), 166, 400);
+// init allEnemies array
 const allEnemies = [];
+// for each enemy create and push a new Enemy into above array
+// Place all enemy objects in an array called allEnemies
 allEnemies.push(bug1, bug2, bug3);
-
-
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -110,32 +156,19 @@ Enemy.prototype.update = function(dt) {
     if (this.x < this.boundary) {
         // move forward
         // increment x by speed * dt
-        this.x += (this.speed * dt) / 1; // changing "/1" - overall enemy speed
+        this.x += (this.speed * dt) / 2; // changing "/1" - overall enemy speed
     } else {
         this.x = -83; // reset pos to start
     }
 };
-
-
-// New hero object
-
-// init allEnemies array
-// for each enemy create and push a new Enemy into above array
-
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// a handleInput() method.
-
 
 // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -149,8 +182,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-
 
 /* TODO: setting to change enemy speeds for difficulties
 allow selection of differentplayer sprites

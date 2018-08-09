@@ -25,12 +25,31 @@ body {
 }
 
 
-#winBox {
-	width: 200px;
-	height: 200px;
-	background-color: #333;
+
+/*
+ * Container holding players to choose from
+ */
+
+#players-container {
+	height: 171px;
+	width: 505px;
+	background-color: #eee;
+	margin: 0 auto;
+	border-radius: 5px;
+	padding: 5px, 5px. 10px, 5px;
 }
 
-.celebrate {
-	border-radius: 25px;
+/* Each image in players-container is given this class */
+.players-to-choose {
+	width: 80px;
+	margin: 10px;
 }
+
+/* Hover effect for each player */
+.transform-player {
+	transform: rotate(0deg) scale(1.2, 1.3) skew(-180deg, -180deg) translate( 0, 0);
+}
+
+/*
+ * Box for buttons - reply, pause, speed.
+ */
